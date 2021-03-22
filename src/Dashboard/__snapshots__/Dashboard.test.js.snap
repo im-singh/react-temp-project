@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rendering text props correctly 1`] = `
+<div
+  className="App"
+>
+  <h1>
+    hello
+  </h1>
+  <p>
+    NaN
+  </p>
+</div>
+`;
+
+exports[`rendering x+y==x+y correctly 1`] = `
+<div
+  className="App"
+>
+  <h1 />
+  <p>
+    3
+  </p>
+</div>
+`;

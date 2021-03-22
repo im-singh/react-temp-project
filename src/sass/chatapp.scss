@@ -1,0 +1,31 @@
+.chat-container{
+    font-size: 1.1rem;
+
+    .self{
+        font-size: 1.3rem;
+        span{
+            color: red;
+        }
+    }
+
+
+    .chat-box{
+        display: flex;
+        .users{
+            background: rgb(188, 240, 186);
+            width: 30%;
+        }
+        .messages{
+            background-color: wheat;
+            width: 70%;
+            min-height: 300px;
+
+            .content{
+                min-height: calc(100% - 50px);
+            }
+            .message-box{
+                
+            }
+        }
+    }
+}
