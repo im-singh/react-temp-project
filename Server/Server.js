@@ -1,6 +1,6 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const cors = require("cors");
-
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     cors: {
@@ -9,7 +9,10 @@ const io = require('socket.io')(http, {
 }
 );
 
+const Mongoose = require('./Mongo/MongoConnect')
+
 app.use(cors())
+app.use(express.json())
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
@@ -27,8 +30,11 @@ app.use(cors())
 //     console.log('params: ', req.params);
 // });
 // app.use("/h", router);
+Mongoose.connect();
+
+
 const r = require('./router');
-app.use('/h', r);
+app.use('/items', r);
 
 io.use((socket, next) => {
     const username = socket.handshake.auth.user;

@@ -10,6 +10,12 @@ exports[`rendering text props correctly 1`] = `
   <p>
     NaN
   </p>
+  <p>
+    NaN
+  </p>
+  <p>
+    isShow showing
+  </p>
 </div>
 `;
 
@@ -20,6 +26,12 @@ exports[`rendering x+y==x+y correctly 1`] = `
   <h1 />
   <p>
     3
+  </p>
+  <p>
+    8
+  </p>
+  <p>
+    isShow showing
   </p>
 </div>
 `;

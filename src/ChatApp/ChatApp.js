@@ -28,9 +28,9 @@ export default function ChatApp() {
     }, [isConnected, users, msgList]);
 
 
-    useEffect(() => {
-        console.log('useEffect users:', users);
-    }, [users])
+    // useEffect(() => {
+    //     console.log('useEffect users:', users);
+    // }, [users])
 
 
 
@@ -43,9 +43,8 @@ export default function ChatApp() {
         // console.log('Content: ', content, from);
         let sender = users.filter(ele => ele.userID === from);
         // console.log("sernder: ", sender);
-        // let newObj = { ...sender[0] }
-        let newObj = sender[0]
-        console.log("newOJB: ", newObj)
+        let newObj = { ...sender[0] }
+
         let msg = { sender: newObj, content };
         let newList = [...msgList];
         newList.push(msg);
