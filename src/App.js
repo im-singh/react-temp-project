@@ -24,7 +24,8 @@ import ChatApp from './ChatApp/ChatApp';
 import Temp1 from './TempComponents/temp1';
 import StateMutation from './TempComponents/StateMutation';
 import NestedRouting from './NestedRouting/NestedRouting';
-import Page404 from './NestedRouting/Page404'
+import MaterialUI from './Material-ui/MaterialUI';
+import Page404 from './NestedRouting/Page404';
 
 const App = () => {
   useEffect(() => {
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/chatApp" component={ChatApp} />
         <Route path="/statemutation" component={StateMutation} />
         <Route path="/nested" component={NestedRouting}/>
+        <Route path="/material" component={MaterialUI}/>
         <Route path="*" component={Page404}/>
       </Switch>
     </Router>
