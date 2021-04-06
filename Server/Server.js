@@ -58,12 +58,9 @@ io.on("connection", (socket) => {
         username: socket.username,
     });
 
-    socket.on("private_message", ({ content, to }) => {
-        console.log("Message: ", content, to);
-        socket.to(to).emit("private_message", {
-            content,
-            from: socket.id,
-        });
+    socket.on("private_message", (data) => {
+        console.log("Message: ", data);
+        socket.to(data.reciver).emit("private_message", data);
     })
 });
 
