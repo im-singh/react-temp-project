@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import SC from '../SocketExample/socket';
 import RenderUsers from './RenderUsers';
 import RenderMessages from './RenderMessages';
+import SelectedUser from './SelectedUser';
 
 
 export default function ChatApp() {
@@ -27,28 +28,24 @@ export default function ChatApp() {
         };
     }, [isConnected, users, msgList]);
 
-
-    // useEffect(() => {
-    //     console.log('useEffect users:', users);
-    // }, [users])
-
-
-
     const connectToSocket = () => {
         // console.log("username: ", username);
         SC.connectSocket(username);
         setConnection(true)
     }
-    const handleMessage = ({ content, from }) => {
-        // console.log('Content: ', content, from);
-        let sender = users.filter(ele => ele.userID === from);
-        // console.log("sernder: ", sender);
-        let newObj = { ...sender[0] }
-
-        let msg = { sender: newObj, content };
+    const handleMessage = (data) => {
+        // // console.log('Content: ', content, from);
+        // let sender = users.filter(ele => ele.userID === from);
+        // // console.log("sernder: ", sender);
+        // let newObj = { ...sender[0] }
+        // // let newObj = sender[0]
+        // // console.log("newOJB: ", newObj)
+        // let msg = { sender: newObj, content };
+        addMessageToList(data);
+    }
+    const addMessageToList = (msg) => {
         let newList = [...msgList];
         newList.push(msg);
-        debugger;
         setMsgList(newList);
     }
     const handleNewUser = (user) => {
@@ -80,16 +77,14 @@ export default function ChatApp() {
     }
     const sendMessage = () => {
 
-        let data = { content: message, to: selectedUser.userID }
-        SC.emitAction("private_message", data)
+        let msg = { content: message, sender: self.userID, reciver: selectedUser.userID };
+        addMessageToList(msg);
+        SC.emitAction("private_message", msg)
     }
     const showUser = () => {
         console.log("showusers; ", users);
     }
-    // sgList])let co = <Fragment />
-    // useEffect(() => {
-    //     co = <RenderMessages msgList={msgList} />
-    // }, [m
+
     return (
         <div className="chat-container">
             {!isConnected && <div>
@@ -103,10 +98,15 @@ export default function ChatApp() {
             </div>
             <div className="chat-box">
                 <div className="users">
-                    <RenderUsers otherUsers={users} selectUser={selectUser} />
+                    <RenderUsers
+                        otherUsers={users}
+                        selectedUser={selectedUser}
+                        selectUser={selectUser}
+                    />
                 </div>
                 <div className="messages">
-                    <RenderMessages msgList={msgList} />
+                    <SelectedUser user={selectedUser} />
+                    <RenderMessages msgList={msgList} selfUser={self} selectedUser={selectedUser} />
 
                     <div className="message-box">
                         <input type="text" onChange={(e) => setMessage(e.target.value)} />

@@ -14,14 +14,32 @@
         .users{
             background: rgb(188, 240, 186);
             width: 30%;
+
+            li.active{
+                background-color: skyblue;
+            }
         }
         .messages{
             background-color: wheat;
             width: 70%;
             min-height: 300px;
 
+            .selected-user{
+                background-color: skyblue;
+                padding: 5px 10px;
+
+                h3{
+                    margin: 0;
+                }
+            }
+
             .content{
                 min-height: calc(100% - 50px);
+
+                .right{
+                    text-align: right;
+                    padding-right: 30px;
+                }
             }
             .message-box{
                 
