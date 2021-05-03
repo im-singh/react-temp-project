@@ -24,8 +24,9 @@ import ChatApp from './ChatApp/ChatApp';
 import Temp1 from './TempComponents/temp1';
 import StateMutation from './TempComponents/StateMutation';
 import NestedRouting from './NestedRouting/NestedRouting';
-import MaterialUI from './Material-ui/MaterialUI';
+// import MaterialUI from './Material-ui/MaterialUI';
 import Page404 from './NestedRouting/Page404';
+import HOC from './HOC/HOC';
 
 const App = () => {
   useEffect(() => {
@@ -40,20 +41,21 @@ const App = () => {
       <ScrollToTop />
       <Switch>
         <Route exact path="/" render={() => <Dashboard x={3} y={4} text={"hello  "} />} />
-        <Route path="/login" component={LoginPage} />
+        {/* <Route path="/login" component={LoginPage} />
         <Route path="/apihit" component={ApiHit} />
         <Route path="/temp" component={Temp1} />
         <Route path="/twouseeffect" component={TwoUseEffect} />
         <Route path="/apiexample" component={ApiExample} />
         <Route path="/scroll1" component={ScrollOne} />
-        <Route path="/scroll2" component={ScrollTwo} />
+        <Route path="/scroll2" component={ScrollTwo} /> 
         <Route path="/socket" component={SocketComponent} />
         <Route path="/socketClass" component={SocketClass} />
         <Route path="/chatApp" component={ChatApp} />
         <Route path="/statemutation" component={StateMutation} />
         <Route path="/nested" component={NestedRouting}/>
-        <Route path="/material" component={MaterialUI}/>
-        <Route path="*" component={Page404}/>
+        <Route path="/material" component={MaterialUI}/> */}
+        <Route path="/hoc" component={HOC} />
+        <Route path="*" component={Page404} />
       </Switch>
     </Router>
   );

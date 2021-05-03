@@ -33,8 +33,11 @@ app.use(express.json())
 Mongoose.connect();
 
 
-const r = require('./router');
-app.use('/items', r);
+const items = require('./items/router');
+app.use('/items', items);
+
+const users = require('./users/router')
+app.use("/users", users)
 
 io.use((socket, next) => {
     const username = socket.handshake.auth.user;

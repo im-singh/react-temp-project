@@ -1,4 +1,4 @@
-const ItemModel = require("./Mongo/itemSchema")
+const ItemModel = require("../Mongo/itemSchema")
 let obj = {}
 
 obj.lm = (req, res) => {
