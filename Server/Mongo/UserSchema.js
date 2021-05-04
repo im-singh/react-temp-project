@@ -5,17 +5,23 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
 })
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
     const user = this;
 
-    bcrypt.genSalt(10, function (err, salt) {
-        if (err) { next(err) }
-        bcrypt.hash(user.password, salt, function (err2, hash) {
-            if (err2) { next(err) };
-            user.password = hash;
-            next();
-        })
+    bcrypt.hash(user.password, 10, function (err2, hash) {
+        if (err2) { return next(err2) };
+        user.password = hash;
+        next();
     })
 })
-const UserModal = mongoose.model('users', userSchema)
-module.exports = UserModal;
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+        if (err) { return (callback(err)) };
+
+        callback(null, isMatch);
+    })
+}
+
+
+const UserModel = mongoose.model('users', userSchema)
+module.exports = UserModel;
