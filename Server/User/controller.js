@@ -6,11 +6,14 @@ function tokenForUser(user) {
     return jwt.encode({ sub: user.id, iat: new Date().getTime() }, config.secret);
 }
 exports.getUsers = (req, res) => {
-    res.json("get users done")
+    res.json(req.user);
 }
-exports.signin = (req, res, next) => {
+exports.signin = (req, res) => {
     res.send({ token: tokenForUser(req.user) })
 }
+
+
+
 exports.signup = (req, res) => {
     let { email, password } = req.body;
     UserModel.findOne({ email })
@@ -24,6 +27,7 @@ exports.signup = (req, res) => {
                     if (err) { res.status(500) };
 
                     if (user) {
+                        console.log(user);
                         res.json({ token: tokenForUser(user) });
                     }
                 })

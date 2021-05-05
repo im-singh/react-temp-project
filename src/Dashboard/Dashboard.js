@@ -1,4 +1,5 @@
-import { Component } from 'react'
+import { Component } from 'react';
+import axios from 'axios';
 import ShowOnMobile from '../Components/ShowOnMobile';
 
 export default class Dashboard extends Component {
@@ -11,6 +12,7 @@ export default class Dashboard extends Component {
     taxPrice = (x, y) => {
         return 5 + this.add(x, y);
     }
+
     render() {
         let { x, y, text } = this.props;
         let { isShow } = this.state;

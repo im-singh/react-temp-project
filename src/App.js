@@ -4,15 +4,15 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import './SocketExample/socket.js';
-import SC from './SocketExample/socket.js';
+// import './SocketExample/socket.js';
+// import SC from './SocketExample/socket.js';
 import './App.css';
 import './styles.scss';
 // import './Firebase/FirebaseInit';
 
 import ApiHit from './ApiHit/apiHitFunctional';
 import ScrollToTop from './Components/ScrollToTop';
-import LoginPage from './LoginPage/LoginPage';
+import LoginPage from './Firebase/LoginPage';
 import TwoUseEffect from './Hooks/twoUseEffect';
 import Dashboard from './Dashboard/Dashboard';
 import ApiExample from './Hooks/apiExample';
@@ -27,6 +27,7 @@ import NestedRouting from './NestedRouting/NestedRouting';
 // import MaterialUI from './Material-ui/MaterialUI';
 import Page404 from './NestedRouting/Page404';
 import HOC from './HOC/HOC';
+import Auth from './Authtokens/Auth';
 
 const App = () => {
   useEffect(() => {
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/statemutation" component={StateMutation} />
         <Route path="/nested" component={NestedRouting}/>
         <Route path="/material" component={MaterialUI}/> */}
+        <Route path="/auth" component={Auth} />
         <Route path="/hoc" component={HOC} />
         <Route path="*" component={Page404} />
       </Switch>

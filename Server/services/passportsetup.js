@@ -28,13 +28,14 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 
 const localOptions = { usernameField: "email" };
 const localLogin = new LocalStrategy(localOptions, function (email, password, done) {
-
-    UserModel.findOne({ email }, function (err, user) {
+    console.log("email :", email, password);
+    UserModel.findOne({ email: email }, function (err, user) {
         if (err) { return done(err) }
 
         if (!user) {
             return done(null, false);
         }
+        console.log("usr", user);
         user.comparePassword(password, function (err, isMatch) {
             if (err) { return done(err) }
 
@@ -42,8 +43,6 @@ const localLogin = new LocalStrategy(localOptions, function (email, password, do
 
             return done(null, user);
         })
-
-
     })
 })
 passport.use(localLogin);

@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const http = require('http').createServer(app);
-const io = require('socket.io')(http, {
-    cors: {
-        origin: '*',
-    }
-}
-);
+// const http = require('http').createServer(app);
+// const io = require('socket.io')(http, {
+//     cors: {
+//         origin: '*',
+//     }
+// }
+// );
 
 const Mongoose = require('./Mongo/MongoConnect')
 
@@ -33,45 +33,44 @@ app.use(express.json())
 Mongoose.connect();
 
 
-const items = require('./items/router');
-app.use('/items', items);
-
-const users = require('./users/router')
-app.use("/users", users)
-
-io.use((socket, next) => {
-    const username = socket.handshake.auth.user;
-    if (!username) {
-        return next(new Error('invalid username'))
-    }
-    socket.username = username;
-    next();
+app.use('/items', require('./items/router'));
+app.use('/auth', require("./User/router"))
+app.all("*", (req, res) => {
+    res.send("404 not found");
 })
+// io.use((socket, next) => {
+//     const username = socket.handshake.auth.user;
+//     if (!username) {
+//         return next(new Error('invalid username'))
+//     }
+//     socket.username = username;
+//     next();
+// })
 
-io.on("connection", (socket) => {
-    const users = [];
+// io.on("connection", (socket) => {
+//     const users = [];
 
-    for (let [id, socket] of io.of("/").sockets) {
-        users.push({
-            userID: id,
-            username: socket.username,
-        });
-    }
-    socket.on("disconnect", () => {
-        console.log('user disconneted')
-    })
-    socket.emit("users", users);
+//     for (let [id, socket] of io.of("/").sockets) {
+//         users.push({
+//             userID: id,
+//             username: socket.username,
+//         });
+//     }
+//     socket.on("disconnect", () => {
+//         console.log('user disconneted')
+//     })
+//     socket.emit("users", users);
 
-    socket.broadcast.emit("user_connected", {
-        userID: socket.id,
-        username: socket.username,
-    });
+//     socket.broadcast.emit("user_connected", {
+//         userID: socket.id,
+//         username: socket.username,
+//     });
 
-    socket.on("private_message", (data) => {
-        console.log("Message: ", data);
-        socket.to(data.reciver).emit("private_message", data);
-    })
-});
+//     socket.on("private_message", (data) => {
+//         console.log("Message: ", data);
+//         socket.to(data.reciver).emit("private_message", data);
+//     })
+// });
 
 
 
@@ -96,6 +95,9 @@ io.on("connection", (socket) => {
 //     })
 // })
 
-http.listen(5000, () => {
-    console.log("Server is listening on 5000")
+app.listen(4000, () => {
+    console.log("PORT: 4000")
 })
+// http.listen(5000, () => {
+//     console.log("Server is listening on 5000")
+// })
